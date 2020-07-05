@@ -43,4 +43,4 @@ Things to do to complete the app
 [ ] Script to initialize the DB before app starts\
 [ ] Use Serialize to create model for the DB resource\
 [ ] Use nodemon to monitor file changes in dev mode\
-[ ] Fix failing tests for Assets route\
+[ ] Fix failing tests for Assets route
