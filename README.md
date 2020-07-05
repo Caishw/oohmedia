@@ -27,9 +27,13 @@ To start the project (Note this will start on PORT 3000)
 
     npm run start
 
-# Route for Shopping center :
+## Route for Shopping center :
 
     localhost:3000/shopping-centers/
+
+## Route for Shopping center :
+
+    localhost:3000/assets/
 
 Things to do to complete the app
 
