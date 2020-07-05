@@ -2,7 +2,8 @@ const { v4 } = require("uuid");
 const db = require("../database");
 
 exports.create = async (req, res) => {
-  const { name, location, dimension, active, shoppingCenterId } = req.body;
+  const { name, location, dimension, active } = req.body;
+  const shoppingCenterId = req.originalUrl.split("/")[2];
   const id = v4();
   const sql =
     "insert into asset (id, name, location, dimension, active, shopping_center_id) values (?,?,?,?,?,?)";
@@ -11,7 +12,7 @@ exports.create = async (req, res) => {
     name,
     location,
     dimension,
-    active === true ? 1 : 0,
+    active === "true" ? 1 : 0,
     shoppingCenterId || null,
   ];
   db.run(sql, params, (error) => {

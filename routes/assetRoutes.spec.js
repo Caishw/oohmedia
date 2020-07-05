@@ -28,7 +28,7 @@ describe("Server", function () {
     describe("Create Asset", () => {
       it("should create a asset", () => {
         app
-          .post("/assets")
+          .post("shopping-centers/id/assets")
           .send({
             name: "Myer",
             location: "1st floor",
@@ -44,7 +44,7 @@ describe("Server", function () {
 
       it("should return bad request when inputs is empty or undefined", (done) => {
         app
-          .post("/assets")
+          .post("shopping-centers/id/assets")
           .send({
             name: "",
           })
@@ -63,7 +63,7 @@ describe("Server", function () {
 
     describe("Get asset", () => {
       it("should return empty list if there are no existing assets", () => {
-        app.get("/assets").then((response) => {
+        app.get("shopping-centers/id/assets").then((response) => {
           expect(response).to.have.status(200);
           expect(response.body).to.deep.equal({ data: [] });
         });
@@ -72,14 +72,14 @@ describe("Server", function () {
       describe("when asset exists", () => {
         it("should return the list of existing assets", (done) => {
           app
-            .post("/assets")
+            .post("shopping-centers/id/assets")
             .send({
               name: "Westfield",
               location: "200 Barangaroo",
             })
             .then((response) => {
               expect(response).to.have.status(201);
-              app.get("/assets").then((response) => {
+              app.get("shopping-centers/id/assets").then((response) => {
                 expect(response.body.data.length).to.be.equal(1);
                 expect(response.body.data[0].name).to.be.equal("Westfield");
                 expect(response.body.data[0].location).to.be.equal(
@@ -92,7 +92,7 @@ describe("Server", function () {
 
         it("should return the asset given an id", (done) => {
           app
-            .post("/assets")
+            .post("shopping-centers/id/assets")
             .send({
               name: "Westfield",
               location: "200 Barangaroo",
@@ -102,11 +102,13 @@ describe("Server", function () {
               return response.body.id;
             })
             .then((response) => {
-              app.get(`/assets/${response}`).then((response) => {
-                expect(response).to.have.status(200);
-                expect(response.body.name).to.be.equal("Westfield");
-                expect(response.body.location).to.be.equal("200 Barangaroo");
-              });
+              app
+                .get(`shopping-centers/id/assets/${response}`)
+                .then((response) => {
+                  expect(response).to.have.status(200);
+                  expect(response.body.name).to.be.equal("Westfield");
+                  expect(response.body.location).to.be.equal("200 Barangaroo");
+                });
             })
             .then(() => done());
         });
@@ -116,7 +118,7 @@ describe("Server", function () {
     describe("Update asset", () => {
       it("should update the name and location of a given asset", (done) => {
         app
-          .post("/assets")
+          .post("shopping-centers/id/assets")
           .send({
             name: "Myer",
             location: "5 Kent street",
@@ -127,7 +129,7 @@ describe("Server", function () {
           })
           .then((id) => {
             app
-              .put(`/assets/${id}`)
+              .put(`shopping-centers/id/assets/${id}`)
               .send({
                 name: "Westfield",
                 location: "5 Kent street",
@@ -148,7 +150,7 @@ describe("Server", function () {
     describe("Delete asset", () => {
       it("should delete a given asset", (done) => {
         app
-          .post("/assets")
+          .post("shopping-centers/id/assets")
           .send({
             name: "Myer",
             location: "5 Kent street",
@@ -159,14 +161,14 @@ describe("Server", function () {
           })
           .then((id) => {
             app
-              .delete(`/assets/${id}`)
+              .delete(`shopping-centers/id/assets/${id}`)
               .then((response) => {
                 expect(response).to.have.status(200);
                 return id;
               })
               .then((id) => {
                 app
-                  .get(`/assets/${id}`)
+                  .get(`shopping-centers/id/assets/${id}`)
                   .send({
                     name: "Westfield",
                     location: "5 Kent street",
@@ -181,7 +183,7 @@ describe("Server", function () {
 
       it("should delete a given asset", (done) => {
         app
-          .post("/assets")
+          .post("shopping-centers/id/assets")
           .send({
             name: "Myer",
             location: "5 Kent street",
@@ -192,14 +194,14 @@ describe("Server", function () {
           })
           .then((id) => {
             app
-              .delete(`/assets/`)
+              .delete(`shopping-centers/id/assets/`)
               .then((response) => {
                 expect(response).to.have.status(200);
                 return id;
               })
               .then((id) => {
                 app
-                  .get(`/assets/${id}`)
+                  .get(`shopping-centers/id/assets/${id}`)
                   .send({
                     name: "Westfield",
                     location: "5 Kent street",

@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/shopping-centers", shoppingCenterRoutes);
-app.use("/assets", assetRouter);
+app.use("/shopping-centers/:id/assets", assetRouter);
 
 const server = app.listen(3000, () => {
   console.log("App listening on port 3000!");

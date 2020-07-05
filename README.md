@@ -33,7 +33,7 @@ To start the project (Note this will start on PORT 3000)
 
 ## Route for Shopping center :
 
-    localhost:3000/assets/
+    localhost:3000/shopping-centers/<id>/assets/
 
 Things to do to complete the app
 
@@ -44,3 +44,15 @@ Things to do to complete the app
 [ ] Use Serialize to create model for the DB resource\
 [ ] Use nodemon to monitor file changes in dev mode\
 [ ] Fix failing tests for Assets route
+
+## Approach to solving the problem :
+
+    1. It was clear that the app needed routes to manage the shopping centers and assets, so i started with the test for shopping center routes. It took me sometime to get the basic setup up and running with the test framework.
+    2. Once I was happy with the shopping center routes, i refactored it to separate route and a service to modularize the app.
+    3. Next I moved to Asset routes, took a similar approach as shopping routes. (Basically copy and pasted the routes from shopping-center)
+    4. Few more things I was planning to do but ran out of time was
+       - Create a relation between asset and shopping center
+       - Provide an API to fetch the shopping centers along with assets. That way if we need only shopping center data, we wont be stressing the DB with loading the associated assets as well.
+       - Create a user route and allow users to login and logout.
+       - Provide an auth code once the user logs in, which can be used in susbsequent requests.
+       - Create a react app with pages to view shopping center and associated assets, ability to update/delete assets, login and logout a user.
