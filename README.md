@@ -33,9 +33,10 @@ To start the project (Note this will start on PORT 3000)
 
 Things to do to complete the app
 
-[ ] Add routes for Asset
 [ ] Add routes for user
 [ ] Update the shopping center schema and route to take in the Asset id to update
 [ ] Update all routes for shopping center and asset to be authorised
 [ ] Script to initialize the DB before app starts
 [ ] Use Serialize to create model for the DB resource
+[ ] Use nodemon to monitor file changes in dev mode
+[ ] Fix failing tests for Assets route

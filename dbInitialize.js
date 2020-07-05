@@ -1,4 +1,4 @@
-const db = require('./database');
+const db = require("./database");
 
 const dbInitialize = {
   createShoppingCenterTable: () => {
@@ -11,7 +11,7 @@ const dbInitialize = {
       (err) => {
         if (err) {
         }
-      },
+      }
     );
   },
   dropShoppingCenterTable: () => {
@@ -20,6 +20,30 @@ const dbInitialize = {
 
   emptyShoppingCenterTable: () => {
     db.run(`DELETE from shopping_center`, (err) => {});
+  },
+
+  createAssetTable: () => {
+    db.run(
+      `CREATE table asset (
+              id text PRIMARY KEY,
+              name text, 
+              location text,
+              dimension text,
+              active integer,
+              shopping_center_id text
+              )`,
+      (err) => {
+        if (err) {
+        }
+      }
+    );
+  },
+  dropAssetTable: () => {
+    db.run(`DROP table asset`, (err) => {});
+  },
+
+  emptyAssetTable: () => {
+    db.run(`DELETE from asset`, (err) => {});
   },
 };
 
